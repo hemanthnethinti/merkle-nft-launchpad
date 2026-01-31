@@ -6,7 +6,6 @@ A full-featured, production-ready NFT launchpad built with Solidity, Hardhat, Ne
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.20-blue?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge)
-docker system prune -a --volumes -f
 ## Table of Contents
 
 - [Features](#features)
