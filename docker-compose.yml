@@ -1,0 +1,47 @@
+# docker-compose.yml
+# Run: docker-compose up
+# Access: Frontend at http://localhost:3000, Hardhat at http://localhost:8545
+
+services:
+  # Hardhat local blockchain node
+  hardhat-node:
+    build:
+      context: .
+      target: contracts
+    container_name: nft-hardhat-node
+    ports:
+      - "8545:8545"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8545"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - nft-network
+    restart: unless-stopped
+
+  # Next.js frontend
+  frontend:
+    build:
+      context: .
+      target: frontend
+      args:
+        NEXT_PUBLIC_CONTRACT_ADDRESS: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    container_name: nft-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+      - NEXT_PUBLIC_RPC_URL=http://hardhat-node:8545
+      - NEXT_PUBLIC_CHAIN_ID=31337
+    depends_on:
+      hardhat-node:
+        condition: service_healthy
+    networks:
+      - nft-network
+    restart: unless-stopped
+
+networks:
+  nft-network:
+    driver: bridge

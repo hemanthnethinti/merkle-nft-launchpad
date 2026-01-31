@@ -1,0 +1,39 @@
+node_modules/
+.env
+.env.local
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache/
+artifacts/
+deployments/
+
+# Frontend
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+frontend/.env.local
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# Lock files (optional - keep for reproducibility)
+# package-lock.json
+# frontend/package-lock.json
